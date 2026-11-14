@@ -34,3 +34,4 @@ def health_check():
         "message": "Сервер PhilatelistAI работает!",
         "database": db_status
     }
+
