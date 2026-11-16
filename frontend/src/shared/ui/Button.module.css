@@ -1,0 +1,53 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  border: none;
+}
+
+.button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Основная кнопка (янтарная/осенняя) */
+.primary {
+  background-color: #E8A33D;
+  color: #1A1A1F;
+}
+.primary:hover:not(:disabled) {
+  background-color: #d69335;
+  transform: translateY(-1px);
+}
+
+/* Второстепенная (прозрачная с рамкой) */
+.secondary {
+  background-color: transparent;
+  color: #E8A33D;
+  border: 2px solid #E8A33D;
+}
+.secondary:hover:not(:disabled) {
+  background-color: rgba(232, 163, 61, 0.1);
+}
+
+/* Спиннер внутри кнопки */
+.loader {
+  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
