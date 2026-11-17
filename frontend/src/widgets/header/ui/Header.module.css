@@ -1,0 +1,89 @@
+.header {
+  position: relative;
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.background {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Меняем картинку на твою header.png */
+  background-image: url('/src/shared/assets/images/header.png');
+  background-size: cover;
+  background-position: center;
+  z-index: 1;
+}
+
+/* Контейнер, который держит текст и подложку вместе */
+.logoWrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  min-width: 425px;
+  height: 100px;
+  padding: 0 20px;
+}
+
+/* Магическая подложка, плавно растворяющаяся по краям */
+.logoBackground {
+  position: absolute;
+  /* Делаем блок чуть больше самого текста, чтобы градиенту было куда растворяться */
+  top: -20px;
+  bottom: -20px;
+  left: -40px;
+  right: -40px;
+
+  /* Создаем радиальный градиент:
+     В центре (0%) — белый цвет с 75% прозрачностью (как в макете).
+     Ближе к краю (60-70%) — он начинает таять.
+     На самом краю (100%) — полностью прозрачный. */
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.5) 40%,
+    rgba(255, 255, 255, 0) 70%
+  );
+
+  /* Легкое размытие для мягкости */
+  filter: blur(8px);
+
+  z-index: -1; /* Прячем под текст */
+}
+/* Псевдоэлемент для прогрессивного размытия */
+.logoBackground::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 33px;
+
+  /* Само размытие (End: 33) */
+  backdrop-filter: blur(33px);
+  -webkit-backdrop-filter: blur(33px);
+
+  /* Маска для создания эффекта Progressive (Start: 0, End: 33) */
+  /* Размытие начинается с 0% (прозрачно) и доходит до 100% (непрозрачно) */
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 100%);
+
+  z-index: -1;
+}
+
+.logo {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  color: #F54021;
+  white-space: nowrap; /* Запрещаем тексту переноситься на новую строку */
+}

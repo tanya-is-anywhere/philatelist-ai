@@ -1,9 +1,19 @@
 import { useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query'; // <-- Импорт TanStack Query
+import { axiosInstance } from '../../../shared/api/axiosInstance'; // <-- Импорт Axios
 import { Button } from '../../../shared/ui';
 import styles from './LandingPage.module.css';
 
 export const LandingPage = () => {
   const navigate = useNavigate();
+  const { data, isLoading, isError } = useQuery({
+  queryKey: ['health'],
+  queryFn: async () => {
+    const res = await axiosInstance.get('/health'); // Запрос на бэкенд
+    return res.data;
+  },
+});
+  console.log('Статус бэкенда:', { data, isLoading, isError });
 
   return (
     <div className={styles.container}>
@@ -13,7 +23,7 @@ export const LandingPage = () => {
       <div className={styles.content}>
         <h2 className={styles.welcomeText}>Добро пожаловать, исследователь!</h2>
 
-        <h1 className={styles.logoText}>Филателист АИ</h1>
+        <h1 className={styles.logoText}>Филателист AI</h1>
 
         <p className={styles.subtitle}>готов приступить к поиску</p>
 
