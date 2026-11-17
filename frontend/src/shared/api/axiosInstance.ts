@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Базовый URL нашего бэкенда (берем из .env файла)
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/v1';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 export const axiosInstance = axios.create({
   baseURL: API_URL,
