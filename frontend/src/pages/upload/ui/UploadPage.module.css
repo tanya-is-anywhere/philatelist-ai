@@ -1,0 +1,41 @@
+.container {
+  padding: 40px 20px;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  color: #1A1A1F;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.subheading {
+  font-size: 18px;
+  color: #4A4A55;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+.recognizeBtn {
+  width: 100%;
+  max-width: 300px;
+}

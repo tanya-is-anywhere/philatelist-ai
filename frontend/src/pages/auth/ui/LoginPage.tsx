@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { Input, Button } from '../../../shared/ui';
 import styles from './AuthPage.module.css';
+import { LoginForm } from '../../../features/auth/ui/LoginForm';
 
 export const LoginPage = () => {
   const navigate = useNavigate();
@@ -13,21 +13,7 @@ export const LoginPage = () => {
         <h2 className={styles.title}>Вход</h2>
         <p className={styles.subtitle}>Рады видеть вас снова!</p>
 
-        <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
-          <Input
-            placeholder="ЛОГИН"
-            className={styles.inputLogin}
-          />
-          <Input
-            placeholder="ПАРОЛЬ"
-            isPassword
-            className={styles.inputPassword}
-          />
-
-          <Button type="submit" className={styles.submitButton}>
-            Войти
-          </Button>
-        </form>
+        <LoginForm />
 
         <div className={styles.links}>
           <span onClick={() => navigate('/register')}>

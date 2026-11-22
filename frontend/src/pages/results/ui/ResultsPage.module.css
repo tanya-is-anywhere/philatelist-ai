@@ -1,0 +1,14 @@
+.page {
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.heading {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  color: #1A1A1F;
+  margin-bottom: 32px;
+}

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { useAuthStore } from '../../entities/user/model/store';
 
 // Базовый URL нашего бэкенда (берем из .env файла)
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
@@ -15,9 +16,10 @@ export const axiosInstance = axios.create({
 // Он срабатывает ПЕРЕД тем, как запрос уйдет на сервер.
 axiosInstance.interceptors.request.use(
   (config) => {
-    // Здесь мы потом будем доставать Access-токен из Zustand и подставлять его в заголовки
-    // const token = useAuthStore.getState().token;
-    // if (token) config.headers.Authorization = `Bearer ${token}`;
+      const token = useAuthStore.getState().accessToken;
+      if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      }
 
     console.log('🚀 Отправляем запрос:', config.method?.toUpperCase(), config.url);
     return config;
