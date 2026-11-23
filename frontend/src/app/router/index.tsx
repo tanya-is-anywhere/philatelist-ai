@@ -6,13 +6,13 @@ import { ResultsPage } from '../../pages/results/ui/ResultsPage';
 import { UploadPage } from '../../pages/upload/ui/UploadPage';
 import { ProfilePage } from '../../pages/profile/ui/ProfilePage';
 import { SettingsPage } from '../../pages/settings/ui/SettingsPage';
+import { InstructionPage } from '../../pages/instructions/ui/InstructionPage';
+import { CollectionPage } from '../../pages/collection/ui/CollectionPage';
 
 import { MainLayout } from '../../widgets/main-layout/ui/MainLayout';
 
 // Временные заглушки для страниц
 import { Button, Input } from '../../shared/ui';
-
-const CollectionPage = () => <div style={{ padding: '20px' }}><h1>Моя коллекция (Collection)</h1></div>;
 
 export const router = createBrowserRouter([
   {
@@ -32,6 +32,7 @@ export const router = createBrowserRouter([
       { path: 'collection', element: <CollectionPage /> },
       { path: 'profile', element: <ProfilePage /> },
       { path: 'settings', element: <SettingsPage /> },
+      { path: 'instructions', element: <InstructionPage /> },
     ],
   },
 ]);

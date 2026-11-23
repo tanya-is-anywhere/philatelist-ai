@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../../shared/ui';
 import styles from './SettingsPage.module.css';
 
 export const SettingsPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <div className={styles.container}>
@@ -19,6 +22,14 @@ export const SettingsPage = () => {
             />
             <span className={styles.slider}></span>
           </label>
+        </div>
+
+        {/* Новый блок с кнопкой */}
+        <div className={styles.settingRow} style={{ borderBottom: 'none', marginBottom: '16px' }}>
+          <span>Нужна помощь?</span>
+          <Button variant="secondary" onClick={() => navigate('/instructions')}>
+            Инструкция
+          </Button>
         </div>
 
         <p className={styles.comingSoon}>

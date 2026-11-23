@@ -30,7 +30,7 @@ export const LandingPage = () => {
         <div className={styles.actions}>
           <Button
             className={styles.customButton}
-            onClick={() => navigate('/upload')}
+            onClick={() => navigate('/register')}
           >
             Начать
           </Button>
