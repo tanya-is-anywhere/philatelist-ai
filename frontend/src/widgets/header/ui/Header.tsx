@@ -27,6 +27,22 @@ export const Header = () => {
         {user && (
           <div className={styles.navPill}>
             <button
+              onClick={() => navigate('/upload')}
+              className={styles.iconBtn}
+              title="К загрузке фото"
+            >
+              🏠
+            </button>
+
+            <button
+              onClick={() => navigate('/collection')}
+              className={styles.iconBtn}
+              title="Моя коллекция"
+            >
+              📁
+            </button>
+
+            <button
               onClick={() => navigate('/settings')}
               className={styles.iconBtn}
               title="Настройки"
