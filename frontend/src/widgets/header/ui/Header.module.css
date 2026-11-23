@@ -87,3 +87,71 @@
   color: #F54021;
   white-space: nowrap; /* Запрещаем тексту переноситься на новую строку */
 }
+
+/* Контейнер, прижимающий всё вправо */
+.navBlock {
+  position: absolute;
+  right: 40px;
+  z-index: 10;
+}
+
+/* Та самая "капсула" с подложкой */
+.navPill {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: rgba(255, 255, 255, 0.85); /* Белая подложка */
+  padding: 8px 24px;
+  border-radius: 40px; /* Круглые края */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Легкая тень для объема */
+  backdrop-filter: blur(8px); /* Размытие фона под капсулой */
+}
+
+/* Стили для кнопки-шестеренки */
+.iconBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: transform 0.2s;
+}
+
+.iconBtn:hover {
+  transform: rotate(45deg); /* Прикольная анимация при наведении */
+}
+
+/* Email теперь черный, так как фон белый */
+.userEmail {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  color: #1A1A1F;
+  cursor: pointer;
+  font-size: 16px;
+  transition: color 0.2s;
+}
+
+.userEmail:hover {
+  color: #E85D35;
+}
+
+/* Кнопка "Выйти" */
+.logoutBtn {
+  background: none;
+  border: 1px solid #E05A4E;
+  color: #E05A4E;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.logoutBtn:hover {
+  background-color: #E05A4E;
+  color: #fff;
+}

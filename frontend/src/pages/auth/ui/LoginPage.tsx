@@ -7,8 +7,6 @@ export const LoginPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.background}></div>
-
       <div className={styles.card}>
         <h2 className={styles.title}>Вход</h2>
         <p className={styles.subtitle}>Рады видеть вас снова!</p>

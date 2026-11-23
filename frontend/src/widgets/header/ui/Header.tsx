@@ -1,21 +1,47 @@
 import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../../entities/user/model/store';
 import styles from './Header.module.css';
 
 export const Header = () => {
   const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
+  const clearAuth = useAuthStore((state) => state.clearAuth);
+
+  const handleLogout = () => {
+    clearAuth();
+    navigate('/login');
+  };
 
   return (
     <header className={styles.header}>
-      {/* Слой с твоим фоновым изображением header.png */}
       <div className={styles.background}></div>
 
-      {/* Обертка для логотипа и подложки */}
+      {/* Логотип по центру */}
       <div className={styles.logoWrapper} onClick={() => navigate('/')}>
-        {/* Сама белая подложка с блюром */}
         <div className={styles.logoBackground}></div>
-
-        {/* Текст */}
         <span className={styles.logo}>Филателист AI</span>
+      </div>
+
+      {/* Блок навигации справа */}
+      <div className={styles.navBlock}>
+        {user && (
+          <div className={styles.navPill}>
+            <button
+              onClick={() => navigate('/settings')}
+              className={styles.iconBtn}
+              title="Настройки"
+            >
+              ⚙️
+            </button>
+
+            <span className={styles.userEmail} onClick={() => navigate('/profile')}>
+              {user.email}
+            </span>
+            <button className={styles.logoutBtn} onClick={handleLogout}>
+              Выйти
+            </button>
+          </div>
+        )}
       </div>
     </header>
   );

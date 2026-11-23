@@ -1,9 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { LandingPage } from '../../pages/landing/ui/LandingPage'; // Импортируем реальную страницу
+import { LandingPage } from '../../pages/landing/ui/LandingPage';
 import { LoginPage } from '../../pages/auth/ui/LoginPage';
 import { RegisterPage } from '../../pages/auth/ui/RegisterPage';
 import { ResultsPage } from '../../pages/results/ui/ResultsPage';
 import { UploadPage } from '../../pages/upload/ui/UploadPage';
+import { ProfilePage } from '../../pages/profile/ui/ProfilePage';
+import { SettingsPage } from '../../pages/settings/ui/SettingsPage';
 
 import { MainLayout } from '../../widgets/main-layout/ui/MainLayout';
 
@@ -28,6 +30,8 @@ export const router = createBrowserRouter([
       { path: 'upload', element: <UploadPage /> },
       { path: 'results', element: <ResultsPage /> },
       { path: 'collection', element: <CollectionPage /> },
+      { path: 'profile', element: <ProfilePage /> },
+      { path: 'settings', element: <SettingsPage /> },
     ],
   },
 ]);

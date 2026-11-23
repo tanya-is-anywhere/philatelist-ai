@@ -10,7 +10,10 @@ html, body {
   width: 100%;
   height: 100%;
   overflow-x: hidden; /* Запрещаем горизонтальную прокрутку */
-  background-color: #FAFAF7; /* Твой базовый фон */
+  background-image: url('/src/shared/assets/images/paper.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   font-family: 'Inter', sans-serif;
 }
 

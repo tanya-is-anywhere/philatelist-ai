@@ -7,8 +7,6 @@ export const RegisterPage = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.background}></div>
-
       <div className={styles.card}>
         <h2 className={styles.title}>Регистрация</h2>
         <p className={styles.subtitle}>Создайте аккаунт исследователя</p>
