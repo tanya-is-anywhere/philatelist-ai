@@ -1,13 +1,14 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.core.config import settings
-from app.db.session import engine
 from sqlalchemy import text
+
+from app.api.v1 import auth
+from app.db.session import engine
 
 app = FastAPI(
     title="PhilatelistAI API",
     description="API для распознавания и оценки почтовых марок",
-    version="1.0.0"
+    version="1.0.0",
 )
 
 app.add_middleware(
@@ -17,6 +18,12 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Public endpoints: /register, /login, /refresh
+app.include_router(auth.router)
+# Versioned alias for the frontend (hidden from Swagger to avoid duplicates).
+app.include_router(auth.router, prefix="/api/v1/auth", include_in_schema=False)
+
 
 @app.get("/health")
 def health_check():
@@ -32,6 +39,5 @@ def health_check():
     return {
         "status": "ok",
         "message": "Сервер PhilatelistAI работает!",
-        "database": db_status
+        "database": db_status,
     }
-
