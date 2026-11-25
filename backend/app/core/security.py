@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import uuid
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -51,6 +52,9 @@ def create_refresh_token(
         "sub": str(subject),
         "exp": expire,
         "type": "refresh",
+        # Unique id keeps tokens distinct when two logins happen within the
+        # same second (JWT exp has second precision).
+        "jti": uuid.uuid4().hex,
     }
     return jwt.encode(payload, settings.JWT_SECRET, algorithm=settings.JWT_ALGORITHM)
 
