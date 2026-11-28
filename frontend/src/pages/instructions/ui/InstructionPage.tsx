@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../shared/ui';
 import { useAuthStore } from '../../../entities/user/model/store';
+import { Icon } from '../../../shared/ui';
 import styles from './InstructionPage.module.css';
 
 export const InstructionPage = () => {
@@ -15,9 +16,9 @@ export const InstructionPage = () => {
   };
 
   const steps = [
-    { icon: '📸', title: '1. Сфотографируйте марку', text: 'Сделайте четкое фото одной марки или целого листа из альбома.' },
-    { icon: '⚙️', title: '2. Выберите вариант обработки', text: 'Наш ИИ поймет, сколько марок на фото, и предложит нужный режим.' },
-    { icon: '✨', title: '3. Нажмите «Распознать»', text: 'Получите оценку каждой марки и общую стоимость вашей коллекции.' },
+    { icon: <Icon name="home" size={70} />, title: '1. Сфотографируйте марку', text: 'Сделайте четкое фото одной марки или целого листа из альбома.' },
+    { icon: <Icon name="settings" size={70} />, title: '2. Выберите вариант обработки', text: 'Наш ИИ поймет, сколько марок на фото, и предложит нужный режим.' },
+    { icon: <Icon name="star" size={70} />, title: '3. Нажмите «Распознать»', text: 'Получите оценку каждой марки и общую стоимость вашей коллекции.' },
   ];
 
   return (

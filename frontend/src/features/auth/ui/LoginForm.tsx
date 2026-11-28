@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isAxiosError } from 'axios';
 import { Input, Button } from '../../../shared/ui';
 import { authApi } from '../api/authApi';
 import { useAuthStore } from '../../../entities/user/model/store';
@@ -19,15 +20,25 @@ export const LoginForm = () => {
     setIsLoading(true);
 
     try {
-      // Временно используем мок, если бэкенда нет (иначе - комментируем)
-      const data = { access_token: 'fake-token', user: { id: '1', email } };
+      const tokens = await authApi.login(email, password);
 
-      //const data = await authApi.login(email, password); // это настоящие данные
+      // Бэкенд на /login возвращает только токены (TokenResponse),
+      // без объекта user. Пока id не приходит — кладём email,
+      // который у нас уже есть из формы.
+      // TODO: попросить Викторию вернуть user в ответе /login
+      const user = { id: 'temp-id', email: email };
 
-      setAuth(data.user, data.access_token); // Сохраняем в Zustand
-      navigate('/upload'); // Перекидываем на загрузку
-    } catch (err: any) {
-      setError('Неверный логин или пароль');
+      // Передаём наш объект user, а не несуществующий data.user
+      setAuth(user, tokens.access_token);
+
+      navigate('/upload');
+    } catch (err: unknown) {
+      // 401 — неверные данные, остальное — сетевые и прочие ошибки
+      if (isAxiosError(err) && err.response?.status === 401) {
+        setError('Неверный логин или пароль');
+      } else {
+        setError('Ошибка соединения. Проверьте, запущен ли сервер.');
+      }
     } finally {
       setIsLoading(false);
     }

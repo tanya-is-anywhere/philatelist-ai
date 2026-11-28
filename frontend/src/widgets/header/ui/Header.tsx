@@ -1,14 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '../../../entities/user/model/store';
+import { Icon } from '../../../shared/ui';
 import styles from './Header.module.css';
 
 export const Header = () => {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
-  const clearAuth = useAuthStore((state) => state.clearAuth);
+  const logout = useAuthStore((state) => state.logout);
 
   const handleLogout = () => {
-    clearAuth();
+    // logout() чистит user, accessToken и refreshToken в сторе
+    // (persist сам удалит их и из localStorage)
+    logout();
     navigate('/login');
   };
 
@@ -31,7 +34,7 @@ export const Header = () => {
               className={styles.iconBtn}
               title="К загрузке фото"
             >
-              🏠
+              <Icon name="home" size={20} />
             </button>
 
             <button
@@ -39,7 +42,7 @@ export const Header = () => {
               className={styles.iconBtn}
               title="Моя коллекция"
             >
-              📁
+              <Icon name="folder" size={20} />
             </button>
 
             <button
@@ -47,7 +50,7 @@ export const Header = () => {
               className={styles.iconBtn}
               title="Настройки"
             >
-              ⚙️
+              <Icon name="settings" size={20} />
             </button>
 
             <span className={styles.userEmail} onClick={() => navigate('/profile')}>

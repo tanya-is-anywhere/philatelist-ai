@@ -2,3 +2,4 @@ export * from './Button';
 export * from './Spinner';
 export * from './Input';
 export * from './Modal';
+export * from './Icon';

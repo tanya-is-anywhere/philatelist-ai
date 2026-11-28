@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { isAxiosError } from 'axios';
 import { Input, Button } from '../../../shared/ui';
 import { authApi } from '../api/authApi';
 import { useAuthStore } from '../../../entities/user/model/store';
@@ -32,17 +33,24 @@ export const RegisterForm = () => {
     setIsLoading(true);
 
     try {
-      // Делаем запрос на регистрацию
-      const data = await authApi.register(email, password);
+      // 1. Регистрация: бэкенд возвращает UserResponse (id, email) — без токенов
+      const user = await authApi.register(email, password);
 
-      // Сохраняем токен и данные пользователя (если бэкенд сразу возвращает токен)
-      setAuth(data.user, data.access_token);
+      // 2. Сразу логинимся теми же данными, чтобы получить токены
+      const tokens = await authApi.login(email, password);
 
-      // Перекидываем на инструкцию после регистрации
+      // 3. Сохраняем: id/email берём из ответа регистрации,
+      //    access-токен — из ответа логина
+      setAuth({ id: user.id, email: user.email }, tokens.access_token);
+
       navigate('/instructions');
-    } catch (err: any) {
-      // Обработка ошибки от бэкенда
-      setError('Ошибка регистрации. Возможно, этот email уже занят.');
+    } catch (err: unknown) {
+      // Бэкенд на занятый email возвращает 400 — показываем понятный текст
+      if (isAxiosError(err) && err.response?.status === 400) {
+        setError('Этот email уже зарегистрирован. Попробуйте войти.');
+      } else {
+        setError('Ошибка регистрации. Попробуйте ещё раз.');
+      }
     } finally {
       setIsLoading(false);
     }

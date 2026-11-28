@@ -1,38 +1,38 @@
-import { axiosInstance } from '../../../shared/api/axiosInstance';
 import { type User } from '../../../entities/user/model/types';
+import { axiosInstance } from '../../../shared/api/axiosInstance';
 
-// Это реальные данные
-// export const authApi = {
-//   login: async (email: string, password: string) => {
-//     const response = await axiosInstance.post('/auth/login', { email, password });
-//     return response.data;
-//   },
-//   register: async (email: string, password: string) => {
-//     const response = await axiosInstance.post('/auth/register', { email, password });
-//     return response.data;
-//   },
-// };
+// Типы ответов бэкенда (см. backend/app/db/schemas.py)
+export interface UserResponse {
+  id: string;
+  email: string;
+  is_active: boolean;
+}
 
-// Это временная заглушка, если бэкенд еще не готов
+export interface TokenResponse {
+  access_token: string;
+  refresh_token: string;
+  token_type: string;
+}
+
 export const authApi = {
-  login: async (email: string, password: string) => {
-    // ВРЕМЕННАЯ ЗАГЛУШКА (пока бэкенд не готов)
-    // Возвращаем фейковые данные
-    return {
-      access_token: 'fake-jwt-token-12345',
-      user: { id: '1', email: email }
-    };
-
-    // РЕАЛЬНЫЙ ЗАПРОС (раскомментируй, когда Виктория сделает бэкенд)
-    // const response = await axiosInstance.post('/api/v1/auth/login', { email, password });
-    // return response.data;
+  // Бэкенд отвечает UserResponse: только id и email, без токенов
+  register: async (email: string, password: string): Promise<UserResponse> => {
+    const { data } = await axiosInstance.post<UserResponse>('/api/v1/auth/register', {
+      email,
+      password,
+    });
+    return data;
   },
 
-  register: async (email: string, password: string) => {
-    // ВРЕМЕННАЯ ЗАГЛУШКА
-    return {
-      access_token: 'fake-jwt-token-12345',
-      user: { id: '2', email: email }
-    };
+  // Бэкенд отвечает TokenResponse: пара токенов, без объекта user
+  login: async (email: string, password: string): Promise<TokenResponse> => {
+    const { data } = await axiosInstance.post<TokenResponse>('/api/v1/auth/login', {
+      email,
+      password,
+      // TODO(captcha): согласовать с Викторией формат токена.
+      // Схема UserLogin принимает captcha_token: string | null
+      captcha_token: 'string',
+    });
+    return data;
   },
 };
