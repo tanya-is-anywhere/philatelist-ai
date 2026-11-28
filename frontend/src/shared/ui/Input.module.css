@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.label {
+  display: none;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  height: 70px;
+  padding: 0 24px;
+  background-color: transparent;
+
+  /* Возвращаем скругления! */
+  border-radius: 0 33px 0 33px;
+
+  border: none;
+  outline: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.input:focus {
+  outline: none;
+  border: none;
+}
+
+/* Магия для перекрытия дефолтного голубого фона браузера */
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover,
+.input:-webkit-autofill:focus,
+.input:-webkit-autofill:active {
+  transition: background-color 5000s ease-in-out 0s;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.inputError {
+  border: 2px solid #E05A4E;
+}
+
+.errorText {
+  font-size: 14px;
+  color: #E05A4E;
+  margin-top: 8px;
+  font-family: 'Inter', sans-serif;
+}
+
+.eyeButton {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255, 255, 255, 0.5);
+  padding: 0;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+}

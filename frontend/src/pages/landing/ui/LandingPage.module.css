@@ -1,0 +1,133 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: #FAFAF7;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/src/shared/assets/images/hero-bg.png');
+  background-size: cover;
+  background-position: center;
+  opacity: 0.7; /* Чуть ярче марки на фоне */
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+
+  /* Уменьшаем максимальную ширину карточки, чтобы она была аккуратной */
+  max-width: 500px;
+  width: 100%;
+
+  /* Уменьшаем внутренние отступы */
+  padding: 40px 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  background-color: rgba(255, 255, 255, 0.75);
+
+  /* Немного уменьшаем радиус скругления для аккуратности */
+  border-radius: 24px;
+
+  box-shadow: 0px 0px 33px 8px rgba(138, 51, 36, 0.25);
+  backdrop-filter: blur(12px);
+}
+
+.welcomeText {
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 18px; /* Было 24, уменьшили */
+  color: #1A1A1F;
+  margin-bottom: 12px;
+}
+
+.logoText {
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  font-size: 56px; /* Было 80, уменьшили */
+  color: #F54021;
+  margin: 0 0 8px 0;
+  letter-spacing: -1px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 16px; /* Было 24, уменьшили */
+  color: #4A4A55;
+  margin-bottom: 32px; /* Чуть меньше отступ снизу */
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* Обновленный класс кнопки */
+.customButton {
+  position: relative; /* Важно для позиционирования слоя текстуры */
+  overflow: hidden;   /* Чтобы текстура не вылезала за края */
+
+  background-color: #904D30 !important;
+  color: #FFFFFF !important;
+  font-size: 18px !important;
+  padding: 12px 48px !important;
+  border-radius: 40px !important;
+  border: none !important;
+  box-shadow: 0px 15px 5px 0px rgba(0, 0, 0, 0.25) !important;
+
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+/* Создаем слой с текстурой, который изначально невидим */
+.customButton::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('/src/shared/assets/images/button-texture.png');
+  background-size: cover;
+  background-position: center;
+
+  /* Прячем его за текстом */
+  z-index: -1;
+  opacity: 0; /* Изначально прозрачный */
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* 🖱️ При наведении: скрываем бордовый фон и включаем текстуру */
+.customButton:hover {
+  background-color: transparent !important;
+  color: #000000 !important;
+  box-shadow: 0px 18px 8px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+.customButton:hover::before {
+  opacity: 1; /* Плавно показываем текстуру */
+}
+
+/* 👇 При нажатии: делаем текстуру бледной и добавляем внутреннюю тень */
+.customButton:active {
+  color: #000000 !important;
+  font-weight: 800 !important;
+  transform: translateY(4px);
+  box-shadow: inset 0px 15px 4px 0px rgba(0, 0, 0, 0.2) !important;
+}
+
+.customButton:active::before {
+  opacity: 0.2; /* Текстура становится на 20% */
+}

@@ -1,0 +1,67 @@
+import { useNavigate } from 'react-router-dom';
+import { useAuthStore } from '../../../entities/user/model/store';
+import { Icon } from '../../../shared/ui';
+import styles from './Header.module.css';
+
+export const Header = () => {
+  const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
+  const logout = useAuthStore((state) => state.logout);
+
+  const handleLogout = () => {
+    // logout() чистит user, accessToken и refreshToken в сторе
+    // (persist сам удалит их и из localStorage)
+    logout();
+    navigate('/login');
+  };
+
+  return (
+    <header className={styles.header}>
+      <div className={styles.background}></div>
+
+      {/* Логотип по центру */}
+      <div className={styles.logoWrapper} onClick={() => navigate('/')}>
+        <div className={styles.logoBackground}></div>
+        <span className={styles.logo}>Филателист AI</span>
+      </div>
+
+      {/* Блок навигации справа */}
+      <div className={styles.navBlock}>
+        {user && (
+          <div className={styles.navPill}>
+            <button
+              onClick={() => navigate('/upload')}
+              className={styles.iconBtn}
+              title="К загрузке фото"
+            >
+              <Icon name="home" size={20} />
+            </button>
+
+            <button
+              onClick={() => navigate('/collection')}
+              className={styles.iconBtn}
+              title="Моя коллекция"
+            >
+              <Icon name="folder" size={20} />
+            </button>
+
+            <button
+              onClick={() => navigate('/settings')}
+              className={styles.iconBtn}
+              title="Настройки"
+            >
+              <Icon name="settings" size={20} />
+            </button>
+
+            <span className={styles.userEmail} onClick={() => navigate('/profile')}>
+              {user.email}
+            </span>
+            <button className={styles.logoutBtn} onClick={handleLogout}>
+              Выйти
+            </button>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
