@@ -5,10 +5,12 @@ import styles from './Header.module.css';
 export const Header = () => {
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user);
-  const clearAuth = useAuthStore((state) => state.clearAuth);
+  const logout = useAuthStore((state) => state.logout);
 
   const handleLogout = () => {
-    clearAuth();
+    // logout() чистит user, accessToken и refreshToken в сторе
+    // (persist сам удалит их и из localStorage)
+    logout();
     navigate('/login');
   };
 

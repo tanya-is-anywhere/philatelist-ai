@@ -2,10 +2,12 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../shared/ui';
 import styles from './SettingsPage.module.css';
+import { useThemeStore } from '../../../entities/user/model/themeStore';
 
 export const SettingsPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useThemeStore();
 
   return (
     <div className={styles.container}>
@@ -17,8 +19,8 @@ export const SettingsPage = () => {
           <label className={styles.switch}>
             <input
               type="checkbox"
-              checked={isDarkMode}
-              onChange={() => setIsDarkMode(!isDarkMode)}
+              checked={theme === 'dark'}
+              onChange={toggleTheme}
             />
             <span className={styles.slider}></span>
           </label>
